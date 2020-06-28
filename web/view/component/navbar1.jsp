@@ -28,7 +28,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <c:choose>
-                    <c:when test="${requestScope.loggedUser.equals('ADMIN')}">
+                    <c:when test="${requestScope.loggedUserRole.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ADMINISTRATOR</a>
                         </li>
@@ -37,9 +37,9 @@
                         </li>
                     </c:when>
 
-                    <c:when test="${requestScope.loggedUser != null}">
+                    <c:when test="${requestScope.loggedUserRole != null}">
                         <li class="nav-item">
-                            <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ${requestScope.loggedUser}</a>
+                            <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ${requestScope.loggedUserName}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logoutServlet">SIGN OUT</a>

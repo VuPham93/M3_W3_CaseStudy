@@ -4,7 +4,10 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <c:choose>
-                    <c:when test="${requestScope.loggedUser.equals('ADMIN')}">
+                    <c:when test="${requestScope.loggedUserRole.equals('admin')}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="userInfo">Administrator</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="gamesServlet?action=new">Add new game</a>
                         </li>
@@ -20,7 +23,7 @@
 
                     </c:when>
 
-                    <c:when test="${requestScope.loggedUser != null}">
+                    <c:when test="${requestScope.loggedUserRole != null}">
                         <li class="nav-item">
                             <a class="nav-link" href="userInfo">Account</a>
                         </li>

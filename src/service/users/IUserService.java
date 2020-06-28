@@ -5,13 +5,15 @@ import model.user.User;
 import java.util.List;
 
 public interface IUserService {
-    List<User> getUserList();
+    static User findUserExactly(String nameOrEmail, String password) {
+        return null;
+    }
 
     User findUser(int id);
 
     List<User> findUser(String input);
 
-    User findUserExactly(String nameOrEmail, String password);
+    List<User> getUserList();
 
     void newUser(User user);
 

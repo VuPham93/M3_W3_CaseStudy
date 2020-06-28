@@ -39,13 +39,16 @@ public class HomeServlet extends HttpServlet {
         List<Game> recentUpdateList = this.gameService.getGamesList();
         List<Game> topSellerList = this.gameService.getGamesList();
         List<Game> comingSoonList = this.gameService.getGamesList();
-        String loggedUser = null;
+        String loggedUserRole = null;
+        String loggedUserName = null;
 
         if (AppUtils.getLoggedUser(request.getSession()) != null) {
-            loggedUser = AppUtils.getLoggedUser(request.getSession()).getName().toUpperCase();
+            loggedUserRole = AppUtils.getLoggedUser(request.getSession()).getRole();
+            loggedUserName = AppUtils.getLoggedUser(request.getSession()).getName().toUpperCase();
         }
 
-        request.setAttribute("loggedUser", loggedUser);
+        request.setAttribute("loggedUserRole", loggedUserRole);
+        request.setAttribute("loggedUserName", loggedUserName);
         request.setAttribute("recentUpdateList", recentUpdateList);
         request.setAttribute("topSellerList", topSellerList);
         request.setAttribute("comingSoonList", comingSoonList);

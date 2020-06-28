@@ -89,7 +89,6 @@ public class UserService implements IUserService {
         return userList;
     }
 
-    @Override
     public User findUserExactly(String nameOrEmail, String password) {
         User user = null;
 
@@ -170,8 +169,8 @@ public class UserService implements IUserService {
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
         double balance = Double.parseDouble(resultSet.getString("balance"));
-
-        return new User(id, name, email, password, balance);
+        String role = resultSet.getString("password");
+        return new User(id, name, email, password, balance, role);
     }
 
     private void setUserInfo(PreparedStatement statement, User user) throws SQLException {

@@ -3,6 +3,8 @@ package security;
 import model.user.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -43,11 +45,17 @@ public class SecurityFilter implements Filter {
         HttpServletRequest wrapRequest = request;
 
         if (loggedUser != null) {
-            int userId = loggedUser.getId();
             String userName = loggedUser.getName();
-            List<String> roles = loggedUser.getRoles();
+            List<String> roles = new ArrayList<>();
 
-            wrapRequest = new UserRoleRequestWrapper(userId, userName, roles, request);
+            if (loggedUser.getRole().equals("admin")) {
+                roles.add(SecurityConfig.ROLE_USER);
+                roles.add(SecurityConfig.ROLE_ADMIN);
+            }
+            if (loggedUser.getRole().equals("user")) {
+                roles.add(SecurityConfig.ROLE_USER);
+            }
+            wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
         }
 
         if (SecurityUtils.isSecurityPage(request)) {

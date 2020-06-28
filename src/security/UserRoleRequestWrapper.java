@@ -6,14 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
-    private final int id;
     private final String user;
     private List<String> roles = null;
     private final HttpServletRequest realRequest;
 
-    public UserRoleRequestWrapper(int id, String user, List<String> roles, HttpServletRequest request) {
+    public UserRoleRequestWrapper(String user, List<String> roles, HttpServletRequest request) {
         super(request);
-        this.id = id;
         this.user = user;
         this.roles = roles;
         this.realRequest = request;

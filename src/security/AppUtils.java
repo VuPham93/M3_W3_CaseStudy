@@ -32,7 +32,6 @@ public class AppUtils {
             id_uri_map.put(id, requestUri);
             return id;
         }
-
         return id;
     }
 

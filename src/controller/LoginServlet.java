@@ -28,12 +28,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("nameOrEmail");
+        String nameOrEmail = request.getParameter("nameOrEmail");
         String password = request.getParameter("password");
-        User userAccount = UserDAO.findUser(userName, password);
+        User userAccount = UserDAO.findUserExactly(nameOrEmail, password);
 
         if (userAccount == null) {
-            String errorMessage = "Invalid userName or Password";
+            String errorMessage = "Invalid user name or password";
 
             request.setAttribute("errorMessage", errorMessage);
 

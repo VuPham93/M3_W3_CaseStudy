@@ -167,8 +167,9 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         double balance = Double.parseDouble(request.getParameter("balance"));
+        String role = request.getParameter("role");
 
-        return new User(id, name, email, password, balance);
+        return new User(id, name, email, password, balance, role);
     }
 
     private void findUser(HttpServletRequest request, HttpServletResponse response) {
