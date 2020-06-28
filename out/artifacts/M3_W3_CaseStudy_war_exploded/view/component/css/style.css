@@ -1,0 +1,87 @@
+h1 {
+    font-size: 1.2rem;
+}
+h2 {
+    font-size: 1.1rem;
+}
+@media (min-width: 500px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+@media (min-width: 768px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+}
+@media (min-width: 1000px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+@media (min-width: 1100px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+}
+body {
+    padding-top: 65px;
+    color: white;
+    background-color: black;
+}
+.bg-dark{
+    background-color: #2A2A2A !important;
+}
+.card{
+    border: 0;
+    color: #2A2A2A;
+}
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+    border: 0;
+}
+.carousel-indicators {
+    justify-content:flex-end;
+    margin-bottom:0;
+}
+hr{
+    height: 1px;
+    color: #797979;
+    background-color: #797979;
+    border: none;
+}
+.bg-gradient{
+    background-image: linear-gradient(to right, #0636ff, #76b8ff);
+}
+.hover12 div {
+    background: rgb(255, 255, 255);
+}
+.hover12 div img {
+    opacity: 1;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.hover12 div:hover img {
+    opacity: .5;
+}
