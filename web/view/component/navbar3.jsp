@@ -1,45 +1,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <nav class="navbar navbar-expand-sm navbar-dark mx-lg-5 mt-3">
+    <nav class="navbar navbar-expand-sm navbar-light mx-lg-5 mt-3">
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <c:set var = "loggedUserRole" scope = "session"	value="${sessionScope.loggedUser.role}"/>
                 <c:set var = "loggedUserName" scope = "session"	value="${sessionScope.loggedUser.name}"/>
                 <c:choose>
                     <c:when test="${loggedUserRole.equals('admin')}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="userInfo">Administrator</a>
+                        <li>
+                            <a class="nav-link" href="homeServlet">< Back to home |</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">${requestScope.game.name}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="gameManagementServlet?action=new">Add new game</a>
+                            <a class="nav-link" href="gameManagementServlet?action=update&id=${requestScope.game.id}">Update game information</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="gamesServlet?action=new">Show game list</a>
+                            <a class="nav-link" href="gameManagementServlet?action=remove&id=${requestScope.game.id}">Remove game</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="usersServlet?action=new">New user</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="usersServlet">Users management</a>
-                        </li>
-
                     </c:when>
 
                     <c:when test="${loggedUserRole != null}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="userInfo">Account</a>
+                        <li>
+                            <a class="nav-link" href="homeServlet">< Back to home |</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="gamesServlet?action=new">Your library</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Browse</a>
+                        <li>
+                            <a class="nav-link" href="#">${requestScope.game.name}</a>
                         </li>
                     </c:when>
 
                     <c:otherwise>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Browse</a>
+                        <li>
+                            <a class="nav-link" href="homeServlet">< Back to home |</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="loginServlet">Sign in</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

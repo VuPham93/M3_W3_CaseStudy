@@ -3,13 +3,15 @@
     <nav class="navbar navbar-expand-sm navbar-dark mx-lg-5 mt-3">
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
+                <c:set var = "loggedUserRole" scope = "session"	value="${sessionScope.loggedUser.role}"/>
+                <c:set var = "loggedUserName" scope = "session"	value="${sessionScope.loggedUser.name}"/>
                 <c:choose>
-                    <c:when test="${requestScope.loggedUserRole.equals('admin')}">
+                    <c:when test="${loggedUserRole.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="userInfo">Administrator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="gamesServlet?action=new">Add new game</a>
+                            <a class="nav-link" href="gameManagementServlet?action=new">Add new game</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="gamesServlet?action=new">Show game list</a>
@@ -23,7 +25,7 @@
 
                     </c:when>
 
-                    <c:when test="${requestScope.loggedUserRole != null}">
+                    <c:when test="${loggedUserRole != null}">
                         <li class="nav-item">
                             <a class="nav-link" href="userInfo">Account</a>
                         </li>

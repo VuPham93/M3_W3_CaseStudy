@@ -25,10 +25,11 @@
                     <a class="nav-link" href="#">HELP</a>
                 </li>
             </ul>
-
+            <c:set var = "loggedUserRole" scope = "session"	value="${sessionScope.loggedUser.role}"/>
+            <c:set var = "loggedUserName" scope = "session"	value="${sessionScope.loggedUser.name}"/>
             <ul class="navbar-nav ml-auto">
                 <c:choose>
-                    <c:when test="${requestScope.loggedUserRole.equals('admin')}">
+                    <c:when test="${loggedUserRole.equals('admin')}">
                         <li class="nav-item">
                             <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ADMINISTRATOR</a>
                         </li>
@@ -37,9 +38,9 @@
                         </li>
                     </c:when>
 
-                    <c:when test="${requestScope.loggedUserRole != null}">
+                    <c:when test="${loggedUserRole != null}">
                         <li class="nav-item">
-                            <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ${requestScope.loggedUserName}</a>
+                            <a class="nav-link" href="homeServlet"><i class="fa fa-user" aria-hidden="true"></i> ${loggedUserName.toUpperCase()}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logoutServlet">SIGN OUT</a>

@@ -18,7 +18,7 @@
         </p>
 
         <p>
-            <a href="gamesServlet">Back to home</a>
+            <a href="homeServlet">Back to home</a>
         </p>
 
         <form method="post">

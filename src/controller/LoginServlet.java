@@ -2,7 +2,7 @@ package controller;
 
 import model.user.User;
 import security.AppUtils;
-import service.users.UserDAO;
+import service.users.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameOrEmail = request.getParameter("nameOrEmail");
         String password = request.getParameter("password");
-        User userAccount = UserDAO.findUserExactly(nameOrEmail, password);
+        User userAccount = UserService.findUserExactly(nameOrEmail, password);
 
         if (userAccount == null) {
             String errorMessage = "Invalid user name or password";

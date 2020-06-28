@@ -1,6 +1,8 @@
 package service.games;
 
 import model.game.Game;
+import service.MySQLConnUtils;
+import service.MySQLException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,25 +18,11 @@ public class GameService implements IGameService{
     public GameService() {
     }
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String jdbcURL = "jdbc:mysql://localhost:3306/game?useSSL=false";
-            String jdbcUsername = "root";
-            String jdbcPassword = "123456";
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
-
     @Override
     public List<Game> getGamesList() {
         List<Game> gameList = new ArrayList<>();
 
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_GAMES)) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_GAMES)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -43,7 +31,7 @@ public class GameService implements IGameService{
             }
         }
         catch (SQLException e) {
-            printSQLException(e);
+            MySQLException.printSQLException(e);
         }
         return gameList;
     }
@@ -51,7 +39,7 @@ public class GameService implements IGameService{
     @Override
     public Game findGame(int id) {
         Game game = null;
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_GAME_BY_ID)) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_GAME_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -60,30 +48,30 @@ public class GameService implements IGameService{
             }
         }
         catch (SQLException e) {
-            printSQLException(e);
+            MySQLException.printSQLException(e);
         }
         return game;
     }
 
     @Override
     public void newGame(Game game) {
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(ADD_NEW_GAME)) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(ADD_NEW_GAME)) {
             setGameInfo(statement, game);
             statement.executeUpdate();
         } catch (SQLException e) {
-            printSQLException(e);
+            MySQLException.printSQLException(e);
         }
     }
 
     @Override
     public boolean updateGame(int id, Game game){
         boolean gameUpdated = false;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_GAME_INFO);) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_GAME_INFO);) {
             setGameInfo(statement, game);
             statement.setInt(14, id);
             gameUpdated = statement.executeUpdate() > 0;
         } catch (SQLException exception) {
-            printSQLException(exception);
+            MySQLException.printSQLException(exception);
         }
         return gameUpdated;
     }
@@ -91,11 +79,11 @@ public class GameService implements IGameService{
     @Override
     public boolean removeGame(int id) {
         boolean gameRemoved = false;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(REMOVE_GAME);) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(REMOVE_GAME);) {
             statement.setInt(1, id);
             gameRemoved = statement.executeUpdate() > 0;
         } catch (SQLException exception) {
-            printSQLException(exception);
+            MySQLException.printSQLException(exception);
         }
         return gameRemoved;
     }
@@ -105,7 +93,7 @@ public class GameService implements IGameService{
         String findingValue = "%" + input + "%";
         List<Game> gameList = new ArrayList<>();
 
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(FIND_GAME)) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(FIND_GAME)) {
             preparedStatement.setString(1, findingValue);
             preparedStatement.setString(2, findingValue);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -116,25 +104,9 @@ public class GameService implements IGameService{
             }
         }
         catch (SQLException e) {
-            printSQLException(e);
+            MySQLException.printSQLException(e);
         }
         return gameList;
-    }
-
-    private void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
     }
 
     private Game getGameInfo (ResultSet resultSet, int id) throws SQLException {

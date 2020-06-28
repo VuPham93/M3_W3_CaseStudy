@@ -27,6 +27,7 @@ public class SecurityConfig {
         List<String> urlPatternsAdmin = new ArrayList<String>();
 
         urlPatternsAdmin.add("/userInfo");
+        urlPatternsAdmin.add("/gameManagementServlet");
 
         mapConfig.put(ROLE_ADMIN, urlPatternsAdmin);
     }
