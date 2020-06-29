@@ -14,7 +14,7 @@
                             <a class="nav-link" href="gameManagementServlet?action=new">Add new game</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="gamesServlet?action=new">Show game list</a>
+                            <a class="nav-link" href="gamesServlet?action=find">Show game list</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="usersServlet?action=new">New user</a>
@@ -22,7 +22,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="usersServlet">Users management</a>
                         </li>
-
                     </c:when>
 
                     <c:when test="${loggedUserRole != null}">

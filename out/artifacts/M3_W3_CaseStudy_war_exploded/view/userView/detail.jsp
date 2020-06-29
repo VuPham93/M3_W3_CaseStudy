@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link" href="usersServlet">Back to home</a>
+                    <a class="nav-link" href="homeServlet">Back to home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="usersServlet?action=update&id=${requestScope.user.id}">Update user information</a>

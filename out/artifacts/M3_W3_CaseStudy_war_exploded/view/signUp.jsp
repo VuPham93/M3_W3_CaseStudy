@@ -12,7 +12,8 @@
 
 <body>
 <div class="login-form">
-    <a href="homeServlet">< Go back</a>
+    <a href="loginServlet">< Go back</a>
+
     <div class="logo"><img src="view/component/img/logo.png" alt="logo"></div>
 
     <div class="social-media">
@@ -25,37 +26,42 @@
 
     <h6>Sign In</h6>
 
-    <form method="post" action="loginServlet">
+    <form method="post" action="signUpServlet">
 
         <div class="textbox">
-            <input type="text" placeholder="Username or Email" name="nameOrEmail">
-            <span class="check-message hidden">Required</span>
-        </div>
-
-        <div class="textbox">
-            <input type="password" name="password" placeholder="Password" id="password">
+            <input type="text" placeholder="Name start with uppercase & 2-10 characters" name="name">
             <span class="check-message hidden">Required</span>
         </div>
         <div style="height: 20px">
-            <p style="color: red; text-align: center">${requestScope.errorMessage}</p>
+            <p style="color: #ff0000; text-align: center">${requestScope.nameError}</p>
         </div>
 
-        <div class="options">
-            <label class="remember-me">
-                <span class="checkbox"><input type="checkbox"><span class="checked"></span></span>Remember Me
-            </label>
-            <a href="#">forgot your password</a>
+        <div class="textbox">
+            <input type="password" name="email" placeholder="Email must be gmail" id="email">
+            <span class="check-message hidden">Required</span>
+        </div>
+        <div style="height: 20px">
+            <p style="color: #ff0000; text-align: center">${requestScope.emailError}</p>
         </div>
 
-        <input type="submit" value="Log In Now" class="login-btn" disabled>
+        <div class="textbox">
+            <input type="password" name="password" placeholder="Password must have 3-10 characters" id="password">
+            <span class="check-message hidden">Required</span>
+        </div>
+
+        <div style="height: 20px; margin-top: 5px">
+            <p style="color: #ff0000; text-align: center">${requestScope.passError}</p>
+            <p style="color: #00ff04; text-align: center">${requestScope.message}</p>
+            <p style="color: #ff0000; text-align: center">${requestScope.messageError}</p>
+        </div>
+
+        <input type="submit" value="Sign Up" class="signIn-btn" disabled>
 
         <div class="privacy-link">
             <a href="#">Private Policy</a>
         </div>
 
     </form>
-
-    <div class="dont-have-account">Don't have a Games Store Account ?<a href="signUpServlet"> Sign Up</a></div>
 </div>
 
 <script type="text/javascript">
@@ -71,12 +77,12 @@
 
     $(".textbox input").keyup(function () {
         var inputs = $(".textbox input");
-        if (inputs[0].value != "" && inputs[1].value) {
-            $(".login-btn").attr("disabled", false);
-            $(".login-btn").addClass("active");
+        if (inputs[0].value != "" && inputs[1].value && inputs[2].value) {
+            $(".signIn-btn").attr("disabled", false);
+            $(".signIn-btn").addClass("active");
         } else {
-            $(".login-btn").attr("disabled", true);
-            $(".login-btn").removeClass("active")
+            $(".signIn-btn").attr("disabled", true);
+            $(".signIn-btn").removeClass("active")
         }
     });
 </script>

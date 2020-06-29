@@ -2,7 +2,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
 
-        <a class="navbar-brand" href="gamesServlet">
+        <a class="navbar-brand" href="homeServlet">
             <img src="view/component/img/logo.png" alt="Logo" style="width:40px">
         </a>
 

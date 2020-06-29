@@ -13,7 +13,11 @@ public interface IUserService {
 
     List<User> findUser(String input);
 
+    User findUserByNameAndEmail(String name, String email);
+
     List<User> getUserList();
+
+    boolean isExitsUser(String name, String email);
 
     void newUser(User user);
 

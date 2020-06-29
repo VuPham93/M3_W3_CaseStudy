@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--Slide-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div id="carouselExampleCaptions" class="carousel slide mx-lg-5" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -27,24 +27,26 @@
             </div>
         </div>
 
-        <c:forEach items="${requestScope.topSellerList}" var="game">
-            <a href="gamesServlet?action=detail&id=${game.id}">
+        <c:forEach items="${requestScope.comingSoonList}" var="game">
+
                 <div class="carousel-item col-12 mt-3">
-                    <div class="card bg-dark text-light">
-                        <div class="card-horizontal">
-                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-xs-12 p-0" >
-                                <img alt="pic" class="d-block w-100" src="<c:url value="${game.bigImg1Path}"/>">
-                            </div>
-                            <div class="card-body col-xl-5 col-lg-5 col-md-5 d-none d-md-block bg-dark">
-                                <div class="align-middle">
-                                    <h1 class="mb-3"><small>${game.name}</small></h1>
-                                    <h2><small>${game.detail}</small></h2>
+                    <a href="gamesServlet?action=detail&id=${game.id}">
+                        <div class="card bg-dark text-light">
+                            <div class="card-horizontal">
+                                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-xs-12 p-0" >
+                                    <img alt="pic" class="d-block w-100" src="<c:url value="${game.bigImg1Path}"/>">
+                                </div>
+                                <div class="card-body col-xl-5 col-lg-5 col-md-5 d-none d-md-block bg-dark">
+                                    <div class="align-middle">
+                                        <h1 class="mb-3"><small>${game.name}</small></h1>
+                                        <h2><small>${game.detail}</small></h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </a>
+
         </c:forEach>
     </div>
 </div>

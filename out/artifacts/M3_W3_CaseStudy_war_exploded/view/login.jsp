@@ -12,7 +12,7 @@
 
 <body>
 <div class="login-form">
-
+    <a href="homeServlet">< Go back</a>
     <div class="logo"><img src="view/component/img/logo.png" alt="logo"></div>
 
     <div class="social-media">
@@ -55,7 +55,7 @@
 
     </form>
 
-    <div class="dont-have-account">Don't have a Epic Games Account ?<a href="#">Sign Up</a></div>
+    <div class="dont-have-account">Don't have a Games Store Account ?<a href="signUpServlet"> Sign Up</a></div>
 </div>
 
 <script type="text/javascript">

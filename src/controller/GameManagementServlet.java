@@ -113,7 +113,7 @@ public class GameManagementServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         gameService.removeGame(id);
         try {
-            response.sendRedirect("gamesServlet");
+            response.sendRedirect("homeServlet");
         } catch (IOException e) {
             e.printStackTrace();
         }
