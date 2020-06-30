@@ -6,28 +6,20 @@
     <c:import url="../component/head.jsp"/>
     <title>Remove user</title>
 </head>
-<body>
-<c:import url="../component/navbar1.jsp"/>
+<body style="background-image: linear-gradient(#d71515, #000000)">
+<c:import url="../component/navbarTop.jsp"/>
+<c:import url="../component/navbarUserInfo.jsp"/>
+
 <div class="container">
-    <h1>Remove user</h1>
+    <h1 style="color: #2A2A2A">Remove user</h1>
     <div>
-        <p>
-            <c:if test='${requestScope["message"] != null}'>
-                <span class="message">${requestScope["message"]}</span>
-            </c:if>
-        </p>
-
-        <p>
-            <a href="usersServlet">Back to home</a>
-        </p>
-
         <form method="post">
             <fieldset>
-                <legend>User information</legend>
-                <table class="table table-light table-striped table-bordered table-hover">
+                <legend style="color: #2A2A2A">${requestScope.user.name}</legend>
+                <table class="table table-borderless table-hover">
                     <tr>
-                        <th scope="row">Name: </th>
-                        <td>${requestScope.user.name}</td>
+                        <th class="w-25" scope="row">Name: </th>
+                        <td class="w-75">${requestScope.user.name}</td>
                     </tr>
                     <tr>
                         <th scope="row">Email: </th>
@@ -42,14 +34,21 @@
                         <td>${requestScope.user.balance}</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td><input class="btn btn-primary" type="submit" value="Remove user"></td>
+                        <td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" value="Remove user"></td>
                     </tr>
                 </table>
             </fieldset>
         </form>
     </div>
 </div>
+
+<%--Catalog--%>
+<div class="container-fluid" style="color: #2A2A2A">
+    <c:import url="../component/catalog.jsp"/>
+</div>
+
+<%--Footer--%>
+<c:import url="../component/footer.jsp"/>
 </body>
 </html>
 

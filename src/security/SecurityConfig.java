@@ -18,16 +18,18 @@ public class SecurityConfig {
     }
 
     private static void init() {
-        List<String> urlPatternsUser = new ArrayList<String>();
+        List<String> urlPatternsUser = new ArrayList<>();
 
-        urlPatternsUser.add("/userInfo");
+        urlPatternsUser.add("/userServlet");
+        urlPatternsUser.add("/buyGameServlet");
 
         mapConfig.put(ROLE_USER, urlPatternsUser);
 
-        List<String> urlPatternsAdmin = new ArrayList<String>();
+        List<String> urlPatternsAdmin = new ArrayList<>();
 
-        urlPatternsAdmin.add("/userInfo");
+        urlPatternsAdmin.add("/userServlet");
         urlPatternsAdmin.add("/gameManagementServlet");
+        urlPatternsAdmin.add("/buyGameServlet");
 
         mapConfig.put(ROLE_ADMIN, urlPatternsAdmin);
     }

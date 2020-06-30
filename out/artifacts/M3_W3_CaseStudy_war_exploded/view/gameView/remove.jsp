@@ -6,10 +6,12 @@
     <c:import url="../component/head.jsp"/>
     <title>Remove game</title>
 </head>
-<body>
-<c:import url="../component/navbar1.jsp"/>
+<body style="background-image: linear-gradient(#ff3737, #ffbdbd)">
+<c:import url="../component/navbarTop.jsp"/>
+<c:import url="../component/navbarGameDetail.jsp"/>
+
 <div class="container">
-    <h1>Remove game</h1>
+    <h1 style="color: #2A2A2A">Remove game</h1>
     <div>
         <p>
             <c:if test='${requestScope["message"] != null}'>
@@ -23,11 +25,11 @@
 
         <form method="post">
             <fieldset>
-                <legend>Game information</legend>
-                <table class="table table-light table-striped table-bordered table-hover">
+                <legend style="color: #2A2A2A">${requestScope.game.name}</legend>
+                <table class="table table-borderless table-hover">
                     <tr>
-                        <th scope="row">Name: </th>
-                        <td>${requestScope.game.name}</td>
+                        <th class="w-25" scope="row">Name: </th>
+                        <td class="w-75">${requestScope.game.name}</td>
                     </tr>
                     <tr>
                         <th scope="row">Category: </th>
@@ -81,8 +83,7 @@
                         <td>${requestScope.game.videoPath}</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td><input class="btn btn-primary" type="submit" value="Remove game"></td>
+                        <td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" value="Remove game"></td>
                     </tr>
                 </table>
             </fieldset>

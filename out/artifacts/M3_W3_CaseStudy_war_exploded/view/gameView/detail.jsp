@@ -11,8 +11,8 @@
 <body style="background-image: linear-gradient(#5aabd0, #ffffff);">
 
     <%--Header--%>
-    <c:import url="../component/navbar1.jsp"/>
-    <c:import url="../component/navbar3.jsp"/>
+    <c:import url="../component/navbarTop.jsp"/>
+    <c:import url="../component/navbarGameDetail.jsp"/>
     <!--Content-->
 
     <div class="container">
@@ -57,7 +57,19 @@
                 </td>
                 <td rowspan="2" style="width: 310px; padding-right: 0; padding-left: 0">
                     <button type="button" class="btn btn-success" disabled style="width: 100px; height: 60px; margin-left: 0">-${requestScope.game.discount}%</button>
-                    <button type="button" class="btn btn-primary" style="width: 200px; height: 60px; margin-right: 0">BUY NOW</button>
+                    <c:choose>
+                        <c:when test="${requestScope.buy == true}">
+                            <a href="${requestScope.game.downloadLink}">
+                                <button type="button" class="btn btn-primary" style="width: 200px; height: 60px; margin-right: 0">DOWN LOAD</button>
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="buyGameServlet?action=buy&id=${requestScope.game.id}">
+                                <button type="button" class="btn btn-primary" style="width: 200px; height: 60px; margin-right: 0">BUY NOW</button>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+
                 </td>
             </tr>
             <tr>

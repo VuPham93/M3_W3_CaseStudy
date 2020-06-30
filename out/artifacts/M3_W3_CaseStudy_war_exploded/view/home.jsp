@@ -7,8 +7,8 @@
 </head>
 <body>
     <!--Header-->
-    <c:import url="component/navbar1.jsp"/>
-    <c:import url="component/navbar2.jsp"/>
+    <c:import url="component/navbarTop.jsp"/>
+    <c:import url="component/navbarHome.jsp"/>
 
     <%--    Slide--%>
     <c:import url="component/slide.jsp"/>

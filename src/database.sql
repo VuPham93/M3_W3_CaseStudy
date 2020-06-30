@@ -119,3 +119,10 @@ INSERT INTO userlist (name, email, password, balance, role)
 
 INSERT INTO userlist (name, email, password, balance, role)
     VALUE ('Phu', 'phu@gmail.com', '123', 1000000, 'user');
+
+CREATE TABLE userlibrary (
+    user_id int,
+    game_id int,
+    FOREIGN KEY (user_id) REFERENCES userlist(id)
+);
+

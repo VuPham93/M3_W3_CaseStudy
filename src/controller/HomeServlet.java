@@ -30,14 +30,14 @@ public class HomeServlet extends HttpServlet {
 
     }
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         showGameList(request, response);
     }
 
     private void showGameList(HttpServletRequest request, HttpServletResponse response) {
-        List<Game> recentUpdateList = this.gameService.getGamesList();
-        List<Game> topSellerList = this.gameService.getGamesList();
-        List<Game> comingSoonList = this.gameService.getGamesList();
+        List<Game> recentUpdateList = this.gameService.getGamesList(GameService.SELECT_RECENTLY_UPDATE_GAMES);
+        List<Game> topSellerList = this.gameService.getGamesList(GameService.SELECT_TOP_SELLER_GAMES);
+        List<Game> comingSoonList = this.gameService.getGamesList(GameService.SELECT_COMING_SOON_GAMES);
 
         request.setAttribute("recentUpdateList", recentUpdateList);
         request.setAttribute("topSellerList", topSellerList);

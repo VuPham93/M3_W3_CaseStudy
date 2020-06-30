@@ -6,10 +6,12 @@
     <c:import url="../component/head.jsp"/>
     <title>Update game information</title>
 </head>
-<body>
-<c:import url="../component/navbar1.jsp"/>
+<body style="background-image: linear-gradient(#fff000, #ffffff)">
+<c:import url="../component/navbarTop.jsp"/>
+<c:import url="../component/navbarUpdateGameInfo.jsp"/>
+
 <div class="container">
-    <h1>Update game information</h1>
+    <h1 style="color: #2A2A2A">Update game information</h1>
     <div>
         <p>
             <c:if test='${requestScope["message"] != null}'>
@@ -17,17 +19,12 @@
             </c:if>
         </p>
 
-        <p>
-            <a href="homeServlet">Back to home</a>
-        </p>
-
         <form method="post">
             <fieldset>
-                <legend>Game information</legend>
-                <table class="table table-light table-striped table-bordered table-hover">
+                <table class="table table-borderless table-hover">
                     <tr>
-                        <th scope="row">Name: </th>
-                        <td><input class="form-control" type="text" name="name" id="name" value="${requestScope.game.name}"></td>
+                        <th class="w-25" scope="row">Name: </th>
+                        <td class="w-75"><input class="form-control" type="text" name="name" id="name" value="${requestScope.game.name}"></td>
                     </tr>
                     <tr>
                         <th scope="row">Category: </th>
@@ -81,13 +78,20 @@
                         <td><input class="form-control" type="text" name="videoPath" id="videoPath" value="${requestScope.game.videoPath}"></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td><input class="btn btn-primary" type="submit" value="Update game information"></td>
+                        <td colspan="2" class="text-center"><input class="btn btn-primary" type="submit" value="Update game information"></td>
                     </tr>
                 </table>
             </fieldset>
         </form>
     </div>
 </div>
+
+<%--Catalog--%>
+<div class="container-fluid" style="color: #2A2A2A">
+    <c:import url="../component/catalog.jsp"/>
+</div>
+
+<%--Footer--%>
+<c:import url="../component/footer.jsp"/>
 </body>
 </html>

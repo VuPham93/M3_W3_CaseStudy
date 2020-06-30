@@ -71,7 +71,7 @@ public class GameManagementServlet extends HttpServlet {
     }
 
     private void createNewGame(HttpServletRequest request, HttpServletResponse response) {
-        List<Game> gameList = gameService.getGamesList();
+        List<Game> gameList = gameService.getGamesList(GameService.SELECT_ALL_GAMES);
 
         int id = gameList.get(gameList.size() - 1).getId() + 1;
         Game game = getInfo(request, id);

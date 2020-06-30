@@ -61,7 +61,7 @@ public class SecurityFilter implements Filter {
                 String requestUri = request.getRequestURI();
                 int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
 
-                response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
+                response.sendRedirect(wrapRequest.getContextPath() + "/loginServlet?redirectId=" + redirectId);
                 return;
             }
 

@@ -10,19 +10,30 @@ import java.util.List;
 
 public class GameService implements IGameService{
     private static final String ADD_NEW_GAME = "insert into gamelist (name, category, detail, systemRequirements, price, discount, status, downloadLink, smallImgPath, bigImg1Path, bigImg2Path, bigImg3Path, videoPath) value (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-    private static final String SELECT_ALL_GAMES = "select * from gamelist";
     private static final String SELECT_GAME_BY_ID = "select * from gamelist where id = ?";
     private static final String UPDATE_GAME_INFO =  "update gamelist set name = ?, category = ?, detail = ?, systemRequirements = ?, price = ?, discount = ?, status = ?, downloadLink = ?, smallImgPath = ?, bigImg1Path = ?, bigImg2Path = ?, bigImg3Path = ?, videoPath = ? where id = ?;";
     private static final String REMOVE_GAME =  "delete from gamelist where id = ?;";
     private static final String FIND_GAME = "select * from gamelist where id like ? or name like ?";
+    public static final String SELECT_ALL_GAMES = "select * from gamelist";
+    public static final String SELECT_ACTION_GAMES = "select * from gamelist where category like 'action'";
+    public static final String SELECT_ADVENTURE_GAMES = "select * from gamelist where category like 'adventure'";
+    public static final String SELECT_FANTASY_GAMES = "select * from gamelist where category like 'fantasy'";
+    public static final String SELECT_STRATEGY_GAMES = "select * from gamelist where category like 'strategy'";
+    public static final String SELECT_HORROR_GAMES = "select * from gamelist where category like 'horror'";
+    public static final String SELECT_RECENTLY_UPDATE_GAMES = "select * from gamelist where status like 'New Releases'";
+    public static final String SELECT_TOP_SELLER_GAMES = "select * from gamelist where status like 'Top seller'";
+    public static final String SELECT_COMING_SOON_GAMES = "select * from gamelist where status like 'Coming Soon'";
+    private static final String SAVE_GAME_TO_LIBRARY = "insert into userlibrary value (?,?);";
+    private static final String GET_GAME_LIBRARY = "select game_id from userlibrary where user_id = ?;";
+
     public GameService() {
     }
 
     @Override
-    public List<Game> getGamesList() {
+    public List<Game> getGamesList(String gameRequest) {
         List<Game> gameList = new ArrayList<>();
 
-        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_GAMES)) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(gameRequest)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -51,6 +62,27 @@ public class GameService implements IGameService{
             MySQLException.printSQLException(e);
         }
         return game;
+    }
+
+    @Override
+    public List<Game> findGame(String input) {
+        String findingValue = "%" + input + "%";
+        List<Game> gameList = new ArrayList<>();
+
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(FIND_GAME)) {
+            preparedStatement.setString(1, findingValue);
+            preparedStatement.setString(2, findingValue);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                gameList.add(getGameInfo(resultSet, id));
+            }
+        }
+        catch (SQLException e) {
+            MySQLException.printSQLException(e);
+        }
+        return gameList;
     }
 
     @Override
@@ -89,18 +121,27 @@ public class GameService implements IGameService{
     }
 
     @Override
-    public List<Game> findGame(String input) {
-        String findingValue = "%" + input + "%";
-        List<Game> gameList = new ArrayList<>();
+    public void saveGameToLibrary(int userId, int gameId) {
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(SAVE_GAME_TO_LIBRARY)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, gameId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            MySQLException.printSQLException(e);
+        }
+    }
 
-        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(FIND_GAME)) {
-            preparedStatement.setString(1, findingValue);
-            preparedStatement.setString(2, findingValue);
+    @Override
+    public List<Integer> getLibraryGames(int userId) {
+        List<Integer> gameList = new ArrayList<>();
+
+        try (Connection connection = MySQLConnUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(GET_GAME_LIBRARY)) {
+            preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                gameList.add(getGameInfo(resultSet, id));
+                int id = resultSet.getInt("game_id");
+                gameList.add(id);
             }
         }
         catch (SQLException e) {
